@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class FileOrganizer {
+
+    public static void main(String[] args) {
+
+        String[] files = {
+            "resume.pdf",
+            "photo.jpg",
+            "notes.txt",
+            "movie.mp4",
+            "program.java",
+            "song.mp3"
+        };
+
+        Map<String, List<String>> categories = new HashMap<>();
+
+        for (String file : files) {
+            String extension = file.substring(file.lastIndexOf('.') + 1);
+
+            categories
+                .computeIfAbsent(extension, k -> new ArrayList<>())
+                .add(file);
+        }
+
+        System.out.println("===== FILE ORGANIZER =====");
+
+        for (Map.Entry<String, List<String>> entry : categories.entrySet()) {
+            System.out.println("\n." + entry.getKey() + " files:");
+
+            for (String file : entry.getValue()) {
+                System.out.println(" - " + file);
+            }
+        }
+    }
+}
+OUTPUT:
+===== FILE ORGANIZER =====
+
+.pdf files:
+ - resume.pdf
+
+.jpg files:
+ - photo.jpg
+
+.txt files:
+ - notes.txt
+
+.mp4 files:
+ - movie.mp4
+
+.java files:
+ - program.java
+
+.mp3 files:
+ - song.mp3
